@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Payment Successful</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+    <div class="success-container">
+        <h1>🎉 Payment Successful</h1>
+        <h2 id="status">Verifying payment...</h2>
+        <a href="my-orders.html" class="btn-primary">View My Orders</a>
+    </div>
+
+
+<script>
+    (async function () {
+        const txRef = new URLSearchParams(window.location.search).get('tx_ref');
+        if (!txRef) {
+            document.getElementById('status').innerText = 'Missing transaction reference';
+            return;
+        }
+
+        const res = await fetch(
+            `/jimmy_furniture/api/payments/chapa_verify.php?tx_ref=${txRef}`,
+            { credentials: 'include' }
+        );
+
+        const data = await res.json();
+
+        document.getElementById('status').innerText =
+            data.success ? 'Payment confirmed ' : 'Verification failed';
+    })();
+</script>
+</body>
+
+</html>

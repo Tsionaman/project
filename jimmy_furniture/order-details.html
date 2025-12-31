@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Order Details</title>
+    <link rel="stylesheet" href="./order_details.css">
+    
+</head>
+
+<body>
+
+    <main style="padding: 40px; max-width: 1000px; margin: auto;">
+        <button onclick="history.back()" style="margin-bottom:20px;">← Back</button>
+
+        <h1 id="order-title"></h1>
+        <p id="order-meta"></p>
+
+        <h3>Delivery Progress</h3>
+        <div id="delivery-progress"></div>
+
+        <h3 style="margin-top:30px;">Order Items</h3>
+        <table width="100%" border="1" cellpadding="10">
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Qty</th>
+                    <th>Price</th>
+                    <th>Subtotal</th>
+                </tr>
+            </thead>
+            <tbody id="order-items"></tbody>
+        </table>
+    </main>
+
+    <script>
+        const STATUS_LABELS = {
+            pending: 'Order Placed',
+            processing: 'Processing',
+            shipped: 'Shipped',
+            delivered: 'Delivered',
+            cancelled: 'Cancelled'
+        };
+
+        async function loadOrderDetails() {
+            const params = new URLSearchParams(window.location.search);
+            const orderId = params.get('id');
+            if (!orderId) return;
+
+            const res = await fetch(`/jimmy_furniture/api/orders/details.php?id=${orderId}`, {
+                credentials: 'include'
+            });
+            const data = await res.json();
+
+            if (!data.success) {
+                alert('Failed to load order');
+                return;
+            }
+
+            document.getElementById('order-title').innerText =
+                `Order #${data.order.order_number}`;
+
+            document.getElementById('order-meta').innerText =
+                `Placed on ${new Date(data.order.created_at).toLocaleDateString()} | Status: ${data.order.status}`;
+
+            // Render delivery progress from history
+            const progress = document.getElementById('delivery-progress');
+            progress.innerHTML = data.history.map(h => `
+        <div style="margin-bottom:5px;">
+            ✔ ${STATUS_LABELS[h.status]} 
+            <small>(${new Date(h.created_at).toLocaleString()})</small>
+        </div>
+    `).join('');
+
+            // Render items
+            const items = document.getElementById('order-items');
+            items.innerHTML = data.items.map(i => `
+        <tr>
+            <td>${i.name}</td>
+            <td>${i.quantity}</td>
+            <td>$${i.price}</td>
+            <td>$${(i.price * i.quantity).toFixed(2)}</td>
+        </tr>
+    `).join('');
+        }
+
+        document.addEventListener('DOMContentLoaded', loadOrderDetails);
+    </script>
+
+</body>
+
+</html>

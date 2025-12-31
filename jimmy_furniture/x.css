@@ -1,0 +1,2648 @@
+@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville&family=Montserrat:wght@300;400;600&display=swap');
+
+:root {
+    --text: #333;
+    --light-grey: #f8f8f8;
+    --border: #e5e5e5;
+    --accent: #9b7e4b; /* Subtle muted gold */
+}
+
+* { margin:0; padding:0; box-sizing: border-box; }
+body { font-family: 'Montserrat', sans-serif; color: var(--text); background: #fff; }
+
+/* Promotional Bar */
+.promo-bar { background: #111; color: #fff; text-align: center; padding: 10px; font-size: 11px; letter-spacing: 2px; }
+
+/* Header */
+.arhaus-header { border-bottom: 1px solid var(--border); background: #fff; position: sticky; top:0; z-index: 1000; }
+.header-top { display: flex; justify-content: space-between; align-items: center; padding: 20px 5%; }
+.brand-logo { font-family: 'Libre Baskerville', serif; font-size: 32px; letter-spacing: 4px; }
+.brand-logo span { font-weight: 300; }
+.right-tools { display: flex; gap: 20px; font-size: 18px; }
+.tool-item { cursor: pointer; position: relative; }
+.count { position: absolute; top: -8px; right: -8px; font-size: 10px; background: var(--text); color: #fff; padding: 2px 5px; border-radius: 50%; }
+
+.cat-nav ul { display: flex; justify-content: center; list-style: none; gap: 40px; padding: 15px 0; }
+.cat-nav a { text-decoration: none; color: var(--text); font-size: 12px; font-weight: 600; letter-spacing: 1px; }
+.sale-link { color: #b30000 !important; }
+
+/* Hero Section */
+.editorial-hero { position: relative; height: 85vh; overflow: hidden; }
+.editorial-hero img { width: 100%; height: 100%; object-fit: cover; }
+.hero-text-box { position: absolute; bottom: 10%; left: 5%; background: rgba(255,255,255,0.9); padding: 50px; max-width: 500px; }
+.hero-text-box h2 { font-family: 'Libre Baskerville', serif; font-size: 42px; margin-bottom: 15px; }
+.shop-btn { background: #111; color: #fff; border: none; padding: 15px 30px; cursor: pointer; font-weight: 600; margin-top: 20px; }
+
+/* Bundle Logic Design */
+.bundle-banner { padding: 100px 10%; background: var(--light-grey); text-align: center; }
+.bundle-inner h2 { font-family: 'Libre Baskerville', serif; font-size: 36px; margin: 20px 0; }
+.bundle-tag { color: var(--accent); font-weight: 600; letter-spacing: 2px; font-size: 12px; }
+
+/* Grid */
+.grid-container { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; padding: 50px 5%; }
+.grid-item { position: relative; height: 400px; cursor: pointer; overflow: hidden; }
+.grid-item img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
+.grid-overlay { position: absolute; inset:0; background: rgba(0,0,0,0.1); display: flex; align-items: center; justify-content: center; }
+.grid-overlay h3 { color: #fff; font-size: 14px; letter-spacing: 2px; }
+.grid-item:hover img { transform: scale(1.05); }
+
+/* Chatbot */
+.bot-launcher { position: fixed; bottom: 30px; right: 30px; background: #fff; border: 1px solid #ddd; padding: 15px 25px; border-radius: 30px; cursor: pointer; display: flex; align-items: center; gap: 10px; font-weight: 600; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+.chat-window { position: fixed; bottom: 100px; right: 30px; width: 350px; background: #fff; border: 1px solid #ddd; display: none; flex-direction: column; }
+.chat-title { background: #111; color: #fff; padding: 15px; display: flex; justify-content: space-between; }
+.chat-log { padding: 20px; height: 300px; overflow-y: auto; }
+.chip-container { display: flex; gap: 10px; margin-top: 15px; flex-wrap: wrap; }
+.chip-container button { padding: 10px; border: 1px solid #333; background: #fff; cursor: pointer; }
+
+/* Footer */
+footer { background: #fff; padding: 80px 10% 40px; border-top: 1px solid var(--border); }
+.footer-wrap { display: flex; justify-content: space-between; margin-bottom: 40px; }
+.chapa-foot { height: 30px; margin-top: 15px; }
+.copy { text-align: center; font-size: 12px; color: #888; }
+/* Auth Modal Background */
+.modal {
+    display: none; position: fixed; z-index: 2000;
+    left: 0; top: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.7); align-items: center; justify-content: center;
+}
+
+.auth-card {
+    background: white; padding: 40px; width: 400px;
+    position: relative; border-radius: 4px; text-align: center;
+}
+
+.auth-tabs { display: flex; border-bottom: 1px solid #eee; margin-bottom: 20px; }
+.auth-tabs button {
+    flex: 1; padding: 10px; border: none; background: none;
+    cursor: pointer; font-family: 'Montserrat', sans-serif; font-weight: 600;
+}
+.auth-tabs button.active { border-bottom: 2px solid #111; }
+
+#auth-form input {
+    width: 100%; padding: 12px; margin: 10px 0;
+    border: 1px solid #ddd; outline: none;
+}
+
+.guest-link { 
+    margin-top: 20px; text-decoration: underline; 
+    cursor: pointer; font-size: 12px; color: #888; 
+}
+
+.close-auth {
+    position: absolute; right: 20px; top: 10px;
+    font-size: 24px; cursor: pointer;
+}/* Feedback when touching or hovering */
+.tool-item, .brand-logo, .search-wrapper button {
+    transition: transform 0.2s ease, opacity 0.2s ease;
+    cursor: pointer;
+}
+
+.tool-item:active {
+    transform: scale(0.9); /* Shrinks slightly when touched */
+    opacity: 0.7;
+}
+
+.tool-item:hover i {
+    color: #9b7e4b; /* Changes color to gold on hover */
+}
+
+.cart-sidebar {
+    position: fixed; right: -400px; top: 0; width: 350px; height: 100%;
+    background: white; box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+    transition: 0.4s; z-index: 3000; padding: 30px;
+}
+.cart-sidebar.open { right: 0; }
+.cart-item { display: flex; justify-content: space-between; padding: 15px 0; border-bottom: 1px solid #eee; }
+#auth-modal {
+    display: none; /* Starts hidden */
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background-color: rgba(0, 0, 0, 0.6); /* Dark overlay */
+    z-index: 1000;
+    justify-content: center; /* Centers horizontally */
+    align-items: center;     /* Centers vertically */
+}
+
+/* This ensures the white box inside doesn't close the modal when clicked */
+.auth-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 400px;
+    position: relative;
+}
+/* Navigation Container */
+.cat-nav {
+    position: relative;
+    background: #fff;
+    border-bottom: 1px solid #eee;
+}
+
+.cat-nav ul {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.cat-nav ul li {
+    padding: 20px 25px;
+}
+
+/* Mega Menu Content (Hidden by Default) */
+
+/* Show Mega Menu on Hover */
+
+
+/* Mega Menu Columns */
+.mega-column {
+    display: flex;
+    flex-direction: column;
+    min-width: 200px;
+}
+
+.mega-column h4 {
+    font-size: 14px;
+    letter-spacing: 1px;
+    margin-bottom: 15px;
+    color: #111;
+    font-weight: 600;
+}
+
+.mega-column a {
+    text-decoration: none;
+    color: #666;
+    font-size: 13px;
+    padding: 5px 0;
+    transition: color 0.3s;
+}
+
+.mega-column a:hover {
+    color: #9b7e4b; /* Jimmy Furniture Gold */
+}
+
+/* Image Column for Luxury Feel */
+.image-col img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    margin-bottom: 10px;
+}
+
+.image-col p {
+    font-size: 12px;
+    font-weight: 600;
+    text-align: center;
+}
+.category-hero {
+    text-align: center;
+    padding: 60px 0;
+    background: #fdfdfd;
+}
+
+.bundle-tracker {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+    background: #f4f1ea;
+    text-align: center;
+}
+
+.progress-container {
+    width: 300px;
+    height: 8px;
+    background: #ddd;
+    margin: 10px auto;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+#progress-bar {
+    height: 100%;
+    background: #9b7e4b;
+    transition: 0.5s;
+}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    padding: 40px 5%;
+}
+
+.product-card {
+    transition: 0.3s;
+}
+
+.img-holder {
+    position: relative;
+    overflow: hidden;
+    background: #f9f9f9;
+}
+
+.img-holder img {
+    width: 100%;
+    display: block;
+    transition: 0.5s;
+}
+
+.product-card:hover img {
+    transform: scale(1.05);
+}
+
+.add-btn {
+    width: 100%;
+    background: #111;
+    color: #fff;
+    border: none;
+    padding: 12px;
+    margin-top: 15px;
+    cursor: pointer;
+}
+
+.add-btn:hover {
+    background: #9b7e4b;
+}
+/* Add to style.css */
+body {
+    animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+/* Import Luxury Font */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Montserrat:wght@300;600&display=swap');
+
+.hero-slider {
+    position: relative;
+    width: 100%;
+    height: 85vh;
+    overflow: hidden;
+}
+
+.slider-track {
+    display: flex;
+    width: 500%; /* 5 images x 100% */
+    height: 100%;
+    transition: transform 1.2s cubic-bezier(0.7, 0, 0.3, 1); /* Smooth luxury slide */
+}
+
+.slide {
+    width: 20%; /* Each slide is 1/5th of the track */
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+
+/* Darker overlay for text readability */
+.hero-overlay {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.3);
+    display: flex; align-items: center; justify-content: center;
+    z-index: 10;
+}
+
+.hero-text {
+    text-align: center;
+    color: white;
+    max-width: 900px;
+    padding: 20px;
+}
+
+.hero-text h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 4rem;
+    letter-spacing: 1px;
+    margin-bottom: 15px;
+    text-shadow: 2px 2px 10px rgba(0,0,0,0.3);
+}
+
+.divider {
+    width: 80px; height: 2px;
+    background: #9b7e4b;
+    margin: 20px auto;
+}
+
+.hero-text p {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.1rem;
+    font-style: italic;
+    letter-spacing: 2px;
+    margin-bottom: 40px;
+    line-height: 1.6;
+}
+
+.shop-btn {
+    padding: 18px 45px;
+    border: 1px solid white;
+    background: transparent;
+    color: white;
+    text-decoration: none;
+    font-size: 13px;
+    letter-spacing: 3px;
+    transition: 0.4s;
+}
+
+.shop-btn:hover {
+    background: white;
+    color: #111;
+}
+.slider-track {
+    display: flex;
+    width: 100%; /* Change this from 500% to 100% */
+    height: 100%;
+    transition: transform 1.2s cubic-bezier(0.7, 0, 0.3, 1);
+}
+
+.slide {
+    flex: 0 0 100%; /* Each slide takes up 100% of the view */
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+}
+.hero-slider {
+    width: 100%;
+    height: 80vh;
+    overflow: hidden; /* This hides the other 4 images */
+    position: relative;
+}
+
+.slider-track {
+    display: flex; /* Forces slides into a row */
+    width: 500%; /* Important: 5 slides = 500% width */
+    height: 100%;
+    transition: transform 1s ease-in-out;
+}
+
+.slide {
+    width: 100%; /* Each slide takes up the full screen width */
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    flex-shrink: 0; /* Prevents slides from squishing */
+}
+/* Category Section Styling */
+.cat-section {
+    padding: 80px 10%;
+    background: #fff;
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.section-title h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.line {
+    width: 60px;
+    height: 3px;
+    background: #9b7e4b; /* Jimmy Furniture Gold */
+    margin: 15px auto;
+}
+
+/* Grid Wrapper */
+.cat-wrapper {
+    display: grid;
+    grid-template-columns: 2fr 2fr; /* Living room takes 2 parts, the others take 1 */
+    grid-template-rows: 300px 300px;
+    gap: 20px;
+}
+
+.cat-box {
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+/* The 'Large' Living Room box spans two rows */
+.cat-box.large {
+    grid-row: span 2;
+}
+.cat-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.8s ease;
+}
+
+/* Dark overlay that appears on hover */
+.cat-box::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.2);
+    transition: background 0.3s;
+}
+
+.cat-box:hover img {
+    transform: scale(1.1); /* Zoom effect */
+}
+
+.cat-box:hover::after {
+    background: rgba(0, 0, 0, 0.4);
+}
+/* Labels */
+.cat-label {
+    position: absolute;
+    bottom: 30px;
+    left: 30px;
+    color:rgb(231, 161, 70);
+    z-index: 10;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+.cat-label span {
+    display: block;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    margin-top: 5px;
+    color: #9b7e4b;
+    font-weight: 400;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: 0.3s;
+}
+
+.cat-box:hover .cat-label span {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .cat-wrapper {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+    }
+    .cat-box.large {
+        grid-row: span 1;
+        height: 300px;
+    }
+}
+.bundle-banner-full {
+    position: relative;
+    width: 100%;
+    height: 70vh; 
+    background-image: url('your-image.jpg');
+    
+    /* FIX: Change 'fixed' to 'scroll' to stop the floating/parallax effect */
+    background-attachment: scroll; 
+    
+    /* KEEP THESE: They ensure the image fills the space correctly */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.bundle-banner-full::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4); /* Adjust 0.4 to make it darker or lighter */
+    z-index: 1;
+}
+
+.bundle-inner {
+    position: relative;
+    z-index: 2; /* Keeps text on top of the overlay */
+}
+.bundle-banner-full {
+    /* THIS LINE IS THE IMAGE */
+    background-image: url('https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&w=2000'); 
+    
+    /* These lines make the image visible */
+    background-size: cover;
+    background-position: center;
+    height: 70vh; /* If you delete this, the image disappears! */
+}
+/* Import Google Fonts for a High-End Look */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@200;400;600&display=swap');
+
+.bundle-text-content {
+    text-align: center;
+    color: #ffffff;
+    max-width: 900px;
+}
+
+/* 1. The Small Tag: Spaced out for a premium feel */
+.gold-tag {
+    font-family: 'Montserrat', sans-serif;
+    color: #9b7e4b;
+    letter-spacing: 6px; /* High spacing = Luxury */
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-bottom: 15px;
+    display: block;
+}
+
+/* 2. The Headline: Using Italics for emotion */
+.bundle-text-content h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 4.5rem;
+    line-height: 1.2;
+    font-weight: 400; /* Lighter weight looks more sophisticated */
+    margin-bottom: 20px;
+}
+
+.bundle-text-content h2 em {
+    font-style: italic;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+/* 3. The Line: A small design touch */
+.luxury-line {
+    width: 50px;
+    height: 1px;
+    background: #9b7e4b;
+    margin: 20px auto 30px;
+}
+
+/* 4. The Paragraph: Airy and light */
+.bundle-text-content p {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.15rem;
+    font-weight: 200; /* Very thin font */
+    line-height: 1.9;
+    letter-spacing: 0.5px;
+    color: rgba(255, 255, 255, 0.85);
+    margin-bottom: 45px;
+}
+
+/* 5. The Button: Strong and confident */
+.shop-btn-gold {
+    font-family: 'Montserrat', sans-serif;
+    padding: 22px 55px;
+    background: transparent;
+    border: 1px solid #fff; /* White border looks cleaner than gold here */
+    color: #fff;
+    text-decoration: none;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    transition: all 0.5s ease;
+}
+
+.shop-btn-gold:hover {
+    background: #fff;
+    color: #111;
+    letter-spacing: 6px; /* Button expands slightly on hover */
+}
+.main-footer {
+    background: #1a1a1a;
+    color: #fff;
+    padding: 80px 10% 40px;
+    margin-top: 100px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 50px;
+}
+
+/* Brand Section */
+.footer-brand-section {
+    flex: 1.5;
+    min-width: 300px;
+}
+
+.footer-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    letter-spacing: 3px;
+    margin-bottom: 20px;
+}
+
+.footer-logo span { font-weight: 300; opacity: 0.8; }
+
+.footer-brand-section p {
+    font-weight: 200;
+    color: #aaa;
+    line-height: 1.6;
+    margin-bottom: 25px;
+}
+
+/* Newsletter Input */
+.newsletter-form {
+    display: flex;
+    border-bottom: 1px solid #444;
+}
+
+.newsletter-form input {
+    background: transparent;
+    border: none;
+    padding: 12px 0;
+    color: #fff;
+    width: 100%;
+    outline: none;
+}
+
+.newsletter-form button {
+    background: transparent;
+    border: none;
+    color: #9b7e4b;
+    font-weight: 600;
+    letter-spacing: 2px;
+    cursor: pointer;
+    padding: 0 10px;
+}
+
+/* Links Columns */
+.footer-links-grid {
+    flex: 2;
+    display: flex;
+    justify-content: space-between;
+    gap: 30px;
+}
+
+.link-column h4 {
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 25px;
+    color: #9b7e4b;
+}
+
+.link-column ul { list-style: none; }
+
+.link-column ul li { margin-bottom: 12px; }
+
+.link-column ul li a {
+    color: #ccc;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 200;
+    transition: 0.3s;
+}
+
+.link-column ul li a:hover { color: #fff; padding-left: 5px; }
+
+/* Bottom Bar */
+.footer-bottom {
+    margin-top: 80px;
+    padding-top: 30px;
+    border-top: 1px solid #333;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12px;
+    color: #666;
+}
+
+.social-links a {
+    color: #fff;
+    font-size: 20px;
+    margin-left: 20px;
+    transition: color 0.3s;
+}
+
+.social-links a:hover { color: #9b7e4b; }
+
+/* Responsive */
+@media (max-width: 900px) {
+    .footer-links-grid { flex-direction: column; }
+    .footer-container { flex-direction: column; }
+}
+/* --- MOBILE RESPONSIVE RULES --- */
+@media (max-width: 768px) {
+    
+    /* 1. Hero Slider: Make it taller for vertical phone screens */
+    .hero-slider {
+        height: 60vh;
+    }
+    .hero-text h2 {
+        font-size: 2.2rem; /* Smaller text for mobile */
+    }
+
+    /* 2. Shop by Space: Stack images on top of each other */
+    .cat-wrapper {
+        grid-template-columns: 1fr; /* One column only */
+        grid-template-rows: auto;
+        padding: 0 5%;
+    }
+    .cat-box.large {
+        grid-row: span 1; /* Stop spanning two rows */
+        height: 350px;
+    }
+    .cat-box {
+        height: 250px;
+    }
+
+    /* 3. Bundle Banner: Adjust text and padding */
+    .bundle-banner-full {
+        height: 50vh;
+        background-attachment: scroll; /* Fixed background is buggy on mobile */
+    }
+    .bundle-text-content h2 {
+        font-size: 1.8rem;
+    }
+    .shop-btn-gold {
+        padding: 15px 30px;
+        width: 100%; /* Full width button is easier to tap */
+    }
+
+    /* 4. Navigation: Hide the desktop menu and show Hamburger */
+    .nav-links {
+        display: none; /* We will use JS to toggle this */
+    }
+    
+    .hamburger {
+        display: block !important; /* Ensure the menu icon is visible */
+        font-size: 28px;
+        cursor: pointer;
+    }
+}
+/* 1. The Container */
+.hero-slider {
+    width: 100%;
+    height: 80vh;
+    overflow: hidden; /* This hides the other 4 images */
+    position: relative;
+}
+
+/* 2. The Moving Track */
+.slider-track {
+    display: flex;
+    width: 500%; /* 5 slides x 100% = 500% */
+    height: 100%;
+    transition: transform 1.2s cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+/* 3. Each Individual Slide */
+.slide {
+    flex: 0 0 20%; /* Each slide takes exactly 1/5th of the track */
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+}
+
+/* 4. The Text Overlay (Must be Absolute) */
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3); /* Darkens images slightly */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #fff;
+    pointer-events: none; /* Allows clicks to pass through to buttons */
+    z-index: 10;
+}
+
+.hero-text {
+    pointer-events: auto; /* Makes the button clickable again */
+}
+.cart-sidebar {
+    position: fixed;
+    top: 0;
+    right: -450px; /* Start hidden */
+    width: 400px;
+    height: 100vh;
+    background: white;
+    box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+    transition: right 0.4s ease;
+    z-index: 2000;
+}
+
+.cart-sidebar.open {
+    right: 0; /* Show when open class is added */
+}.cart-sidebar {
+    position: fixed;
+    top: 0;
+    right: -450px; /* Start hidden */
+    width: 400px;
+    height: 100vh;
+    background: white;
+    box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+    transition: right 0.4s ease;
+    z-index: 2000;
+}
+
+.cart-sidebar.open {
+    right: 0; /* Show when open class is added */
+}
+.cat-section {
+    padding: 60px 5%;
+    background: #fff;
+    overflow-x: hidden; /* Prevents unwanted side-scrolling */
+}
+
+.cat-wrapper {
+    display: flex;
+    flex-direction: row; /* Forces left-to-right */
+    justify-content: space-between; /* Spreads them out evenly */
+    gap: 20px;
+    width: 100%;
+}
+
+.cat-box {
+    flex: 1; /* This makes all boxes exactly the same width */
+    position: relative;
+    height: 400px; /* Adjust height as needed */
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.4s ease;
+}
+
+.cat-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.8s ease;
+}
+
+.cat-box:hover img {
+    transform: scale(1.1);
+}
+
+.cat-label {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    color: white;
+    font-size: 1.2rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    z-index: 2;
+}
+
+/* Add a slight dark tint so the white text is always readable */
+.cat-box::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.4), transparent);
+}
+
+/* Mobile: On phones, let them scroll horizontally or stack */
+@media (max-width: 900px) {
+    .cat-wrapper {
+        flex-wrap: nowrap;
+        overflow-x: auto; /* Allows swiping left-to-right on mobile */
+        padding-bottom: 15px;
+    }
+    .cat-box {
+        min-width: 250px; /* Ensures they don't get too squished */
+    }
+}
+.search-container {
+    display: flex;
+    align-items: center;
+    background: #f4f4f4; /* Light grey background for the bar */
+    padding: 5px 10px;
+    border-radius: 20px;
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+    width: 30px; /* Only big enough for the icon at first */
+}
+
+/* When active, the container grows */
+.search-container.active {
+    width: 250px; /* Adjust width to your liking */
+    background: #fff;
+    border: 1px solid #ddd;
+}
+
+.search-input {
+    width: 0;
+    border: none;
+    outline: none;
+    background: transparent;
+    transition: all 0.4s ease;
+    font-size: 16px;
+    padding: 0;
+}
+
+/* When the container is active, the input grows */
+.search-container.active .search-input {
+    width: 100%;
+    padding: 5px 10px;
+}
+
+#searchIcon {
+    cursor: pointer;
+    font-size: 18px;
+    color: #333;
+}
+.search-results {
+    position: absolute;
+    top: 45px;
+    left: 0;
+    width: 100%;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    display: none; /* Hidden until user types */
+    max-height: 300px;
+    overflow-y: auto;
+    z-index: 999;
+}
+
+.result-item {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    cursor: pointer;
+    border-bottom: 1px solid #eee;
+    transition: background 0.3s;
+}
+
+.result-item:hover {
+    background: #f9f9f9;
+}
+
+.result-item img {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    border-radius: 4px;
+    margin-right: 15px;
+}
+
+.result-item span {
+    font-size: 14px;
+    color: #333;
+    font-weight: 500;
+}
+/* Sidebar and Modal General Styling */
+.side-panel, .modal-content {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Cart Item Layout */
+.cart-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 15px 0;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.cart-item img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+.item-details {
+    flex-grow: 1;
+}
+
+.item-details h4 {
+    margin: 0;
+    font-size: 14px;
+    text-transform: uppercase;
+}
+
+.remove-btn {
+    background: none;
+    border: none;
+    color: #ff4757;
+    cursor: pointer;
+    font-size: 12px;
+    text-decoration: underline;
+}
+
+/* Footer and Totals */
+.panel-footer {
+    margin-top: auto;
+    padding-top: 20px;
+    border-top: 2px solid #333;
+}
+
+.cart-total {
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+.checkout-btn, .pay-btn {
+    width: 100%;
+    padding: 15px;
+    background: #1a1a1a;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    letter-spacing: 1px;
+    transition: 0.3s;
+}
+
+.checkout-btn:hover { background: #333; }
+.pay-btn { background: #00cd86; margin-top: 15px; } /* Chapa Brand Green */
+
+/* Modal Styling */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.7);
+    z-index: 3000;
+    backdrop-filter: blur(5px);
+}
+
+.modal-content {
+    background: white;
+    width: 90%;
+    max-width: 450px;
+    margin: 5% auto;
+    padding: 30px;
+    position: relative;
+    border-radius: 8px;
+}
+
+.modal-content input {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    box-sizing: border-box; /* Important for width alignment */
+}
+/* Modal Overlay Setup */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 2000;
+    left: 0; top: 0;
+    width: 100%; height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    backdrop-filter: blur(4px);
+    align-items: center;
+    justify-content: center;
+}
+
+/* Modal Content Card */
+.modal-content {
+    background-color: #fff;
+    padding: 40px;
+    border-radius: 20px;
+    width: 90%;
+    max-width: 500px;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+}
+
+/* Close Button */
+.modal-close {
+    position: absolute;
+    top: 20px; right: 20px;
+    background: none; border: none; font-size: 20px; cursor: pointer;
+}
+
+/* Gold Button Style */
+.checkout-btn, .place-order-btn, .shop-btn-gold {
+    background-color: #c59d5f;
+    color: white;
+    border: none;
+    padding: 15px 20px;
+    border-radius: 10px;
+    width: 100%;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: 0.3s;
+}
+
+.checkout-btn:hover { background-color: #a3814d; }
+
+/* Form Fields */
+.checkout-form .form-group { margin-bottom: 15px; }
+.checkout-form label { display: block; font-size: 12px; margin-bottom: 5px; color: #777; }
+.checkout-form input, .checkout-form textarea {
+    width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px;
+}
+
+/* Step Bar Styling */
+.checkout-steps { display: flex; justify-content: space-around; margin-bottom: 30px; }
+.step { text-align: center; color: #ccc; font-size: 12px; }
+.step.active { color: #c59d5f; font-weight: bold; }
+.step-number { 
+    width: 25px; height: 25px; border: 2px solid currentColor; 
+    border-radius: 50%; margin: 0 auto 5px; line-height: 22px; 
+}
+.product-image-container {
+    position: relative;
+    overflow: hidden;
+    border-radius: 12px;
+}
+
+.wishlist-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: white;
+    border: none;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    z-index: 10;
+    transition: 0.3s ease;
+    color: #333;
+}
+
+.wishlist-btn:hover {
+    transform: scale(1.1);
+    color: #c59d5f; /* Jimmy Furniture Gold */
+}
+
+/* Optional: Class to show when item is already in wishlist */
+.wishlist-btn.active i {
+    font-weight: 900; /* Solid heart */
+    color: #ff4757; /* Red heart */
+}
+/* Modal Overlay */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed;
+    z-index: 2000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(5px);
+    justify-content: center;
+    align-items: center;
+}
+
+/* Modal Content Box */
+.modal-content {
+    background: #fff;
+    padding: 30px;
+    border-radius: 15px;
+    width: 90%;
+    max-width: 500px;
+    position: relative;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.checkout-modal, .cart-modal {
+    max-width: 800px;
+}
+
+/* Toast Notification */
+.toast {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #333;
+    color: #fff;
+    padding: 15px 25px;
+    border-radius: 8px;
+    display: none;
+    z-index: 3000;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.toast.show {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    animation: slideIn 0.3s ease-out;
+}
+
+/* Utilities */
+.hidden { display: none; }
+
+@keyframes slideIn {
+    from { transform: translateX(100%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+/* Cart Item Row Styling */
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+}
+/* Dark Overlay */
+.modal {
+    display: none; /* Controlled by JS */
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.6); /* Dim background */
+    z-index: 9999;
+    justify-content: center;
+    align-items: center;
+}
+
+/* The White Card */
+.auth-card {
+    background: #ffffff;
+    width: 90%;
+    max-width: 450px;
+    padding: 40px;
+    border-radius: 20px;
+    position: relative;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+}
+
+/* Tabs Styling */
+.auth-tabs {
+    display: flex;
+    margin-bottom: 30px;
+    border-bottom: 1px solid #eee;
+}
+
+.auth-tabs button {
+    flex: 1;
+    padding: 12px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    color: #999;
+    font-size: 14px;
+}
+
+.auth-tabs button.active {
+    color: #333;
+    border-bottom: 2px solid #333;
+}
+
+/* Form Styling */
+.form-group { margin-bottom: 20px; text-align: left; }
+.form-group label { display: block; margin-bottom: 8px; font-weight: 500; }
+.form-group input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background: #fff;
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 14px;
+    background: #333;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.modal-close {
+    position: absolute;
+    top: 20px; right: 20px;
+    background: none; border: none; font-size: 20px; cursor: pointer;
+}
+#user-profile-area {
+    position: relative;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.user-trigger {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 5px 12px;
+    background: #f0f0f0;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.dropdown-content {
+    display: none; /* Hidden */
+    position: absolute;
+    top: 40px;
+    right: 0;
+    background: white;
+    min-width: 150px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    border-radius: 8px;
+    z-index: 9999; /* Very important! */
+    overflow: hidden;
+}
+
+.dropdown-content.show {
+    display: block; /* Shown via JS */
+}
+
+.dropdown-item {
+    padding: 12px 15px;
+    font-size: 14px;
+    transition: 0.2s;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.dropdown-item:hover {
+    background: #f9f9f9;
+}
+
+.logout-red {
+    color: #d9534f;
+    font-weight: bold;
+}
+/* Container for the name and menu */
+.user-dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+/* The name box (looks like the "kal" box in your screenshot) */
+.user-trigger {
+    display: flex;
+    align-items: center;
+    background: #f4f4f4;
+    padding: 6px 15px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: 600;
+    border: 1px solid #ddd;
+    transition: 0.3s;
+}
+
+.user-trigger:hover {
+    background: #e8e8e8;
+}
+
+/* The hidden menu */
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 45px;
+    right: 0;
+    background: white;
+    min-width: 140px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    border-radius: 8px;
+    z-index: 10000; /* Ensure it stays above everything */
+    overflow: hidden;
+}
+
+/* Class to show the menu via JS */
+.dropdown-menu.active {
+    display: block;
+}
+
+.menu-item {
+    padding: 12px 15px;
+    font-size: 14px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.menu-item:hover {
+    background: #f9f9f9;
+}
+
+.logout-btn {
+    color: #e74c3c; /* Red color for logout */
+    font-weight: bold;
+}
+.user-profile-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+.user-pill {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #eee;
+    padding: 5px 15px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: bold;
+    border: 1px solid #ccc;
+}
+
+.logout-content {
+    display: none; /* Hidden by default */
+    position: absolute;
+    top: 110%;
+    right: 0;
+    background: white;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    border-radius: 5px;
+    z-index: 10000; /* Keeps it above everything */
+    min-width: 120px;
+}
+
+.logout-content.show-logout {
+    display: block; /* Shown when clicked */
+}
+
+.logout-action {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    background: none;
+    color: #e74c3c; /* Red color */
+    cursor: pointer;
+    text-align: left;
+    font-weight: bold;
+}
+
+.logout-action:hover {
+    background: #f9f9f9;
+}
+.user-profile-pill {
+    display: flex;
+    align-items: center;
+    background: #ffffff;
+    border: 1px solid #e0e0e0;
+    padding: 4px 12px;
+    border-radius: 25px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.user-name-label {
+    font-weight: 600;
+    font-size: 14px;
+    color: #333;
+    margin-right: 10px;
+    border-right: 1px solid #eee;
+    padding-right: 10px;
+}
+
+.logout-icon-btn {
+    background: transparent;
+    border: none;
+    color: #ff4d4d; /* Red logout color */
+    cursor: pointer;
+    font-size: 16px;
+    padding: 2px;
+    display: flex;
+    align-items: center;
+    transition: transform 0.2s ease;
+}
+
+.logout-icon-btn:hover {
+    transform: scale(1.2);
+    color: #cc0000;
+}
+/* Chat Window Container */
+.chat-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 20px;
+    height: 400px;
+    overflow-y: auto;
+    background: #fdfdfd;
+}
+
+/* Base style for all bubbles */
+.chat-bubble {
+    max-width: 80%;
+    padding: 12px 16px;
+    border-radius: 15px;
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+/* Bot Response (Left Side) */
+.bot-msg {
+    align-self: flex-start;
+    background-color: #f1f0f0;
+    color: #333;
+    border-bottom-left-radius: 2px;
+}
+
+/* User Message (Right Side) */
+.user-msg {
+    align-self: flex-end;
+    background-color: #333; /* Matches your site theme */
+    color: white;
+    border-bottom-right-radius: 2px;
+}
+#chat-box {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 15px;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+/* User Message - Right side */
+.user-msg {
+    align-self: flex-end;
+    background-color: #333;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 15px 15px 0 15px;
+    max-width: 70%;
+}
+
+/* Bot Response - Left side */
+.bot-msg {
+    align-self: flex-start;
+    background-color: #f1f1f1;
+    color: #333;
+    padding: 10px 15px;
+    border-radius: 15px 15px 15px 0;
+    max-width: 70%;
+    border: 1px solid #ddd;
+}
+#chat-box {
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+    height: 350px;
+    overflow-y: auto;
+    background: #fff;
+    border: 1px solid #eee;
+}
+
+.chat-bubble {
+    margin-bottom: 12px;
+    padding: 10px 15px;
+    max-width: 80%;
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+/* User Messages: Right Aligned */
+.user-msg {
+    align-self: flex-end;
+    background-color: #333; /* Dark theme to match Jimmy Furniture */
+    color: white;
+    border-radius: 15px 15px 0 15px;
+}
+
+/* Bot Messages: Left Aligned */
+.bot-msg {
+    align-self: flex-start;
+    background-color: #f1f1f1;
+    color: #333;
+    border-radius: 15px 15px 15px 0;
+    border: 1px solid #ddd;
+}
+#chat-body {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 15px;
+    background: #fff;
+    height: 300px;
+    overflow-y: auto;
+}
+
+.message {
+    max-width: 80%;
+    padding: 10px 14px;
+    font-size: 13px;
+    line-height: 1.5;
+    border-radius: 12px;
+}
+
+/* User Bubble - Right Aligned */
+.user-msg {
+    align-self: flex-end;
+    background-color: #333;
+    color: #fff;
+    border-bottom-right-radius: 2px;
+}
+
+/* Bot Bubble - Left Aligned */
+.bot-msg {
+    align-self: flex-start;
+    background-color: #f0f0f0;
+    color: #333;
+    border: 1px solid #ddd;
+    border-bottom-left-radius: 2px;
+}
+#chat-body {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 15px;
+    height: 300px;
+    overflow-y: auto;
+}
+
+.message {
+    max-width: 80%;
+    padding: 10px 14px;
+    font-size: 13px;
+    border-radius: 15px;
+}
+
+/* Bot Message - Left Side */
+.bot-msg {
+    align-self: flex-start;
+    background-color: #f1f1f1;
+    color: #333;
+    border-bottom-left-radius: 2px;
+}
+
+/* User Message - Right Side */
+.user-msg {
+    align-self: flex-end;
+    background-color: #333; /* Theme color */
+    color: white;
+    border-bottom-right-radius: 2px;
+}
+#chat-body {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 15px;
+    height: 300px;
+    overflow-y: auto;
+}
+
+.message {
+    max-width: 80%;
+    padding: 10px 14px;
+    font-size: 13px;
+    border-radius: 15px;
+}
+
+/* Bot Message - Left Side */
+.bot-msg {
+    align-self: flex-start;
+    background-color: #f1f1f1;
+    color: #333;
+    border-bottom-left-radius: 2px;
+}
+
+/* User Message - Right Side */
+.user-msg {
+    align-self: flex-end;
+    background-color: #333; /* Theme color */
+    color: white;
+    border-bottom-right-radius: 2px;
+}.chat-body {
+    display: flex;
+    flex-direction: column; /* Stacks messages vertically */
+    gap: 10px;
+    padding: 15px;
+    height: 300px;
+    overflow-y: auto;
+}
+
+.message {
+    max-width: 85%;
+    padding: 10px 15px;
+    border-radius: 15px;
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+/* BOT: Arranged to the Left */
+.bot-msg {
+    align-self: flex-start;
+    background-color: #f1f1f1;
+    color: #333;
+    border-bottom-left-radius: 2px;
+}
+
+/* USER: Arranged to the Right */
+.user-msg {
+    align-self: flex-end;
+    background-color: #333; /* Matches your theme */
+    color: white;
+    border-bottom-right-radius: 2px;
+}
+
+.chat-actions {
+    display: flex;
+    gap: 5px;
+    padding: 10px;
+    justify-content: center;
+}
+
+.chat-btn {
+    padding: 5px 10px;
+    font-size: 12px;
+    cursor: pointer;
+    border: 1px solid #333;
+    background: white;
+    border-radius: 4px;
+}
+/* Lines to arrange the chatbot responses */
+.bot-entry {
+    background: #f0f0f0;
+    color: #333;
+    align-self: flex-start; /* Aligns bot to left */
+    padding: 10px;
+    border-radius: 10px 10px 10px 0;
+    margin: 5px 0;
+    max-width: 85%;
+}
+
+#chatLog p[style*="text-align:right"] {
+    background: #333;
+    color: #fff;
+    align-self: flex-end; /* Aligns user to right */
+    padding: 10px;
+    border-radius: 10px 10px 0 10px;
+    margin: 5px 0;
+    max-width: 85%;
+}
+.bot-entry {
+    background: #f1f1f1;
+    color: #333;
+    padding: 10px;
+    border-radius: 10px 10px 10px 0;
+    margin: 5px 0;
+    max-width: 80%;
+    align-self: flex-start; /* Keeps bot on the left */
+}
+
+/* For the User entries you append in JS */
+#chatLog p[style*="text-align:right"] {
+    background: #e0e0e0;
+    padding: 8px;
+    border-radius: 10px 10px 0 10px;
+    display: inline-block;
+    max-width: 80%;
+    align-self: flex-end; /* Keeps user on the right */
+}/* Chat Window Layout */
+#chatLog {
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+}
+
+/* User Bubble (Right) */
+.user-bubble {
+    align-self: flex-end;
+    background: #333;
+    color: white;
+    padding: 10px;
+    border-radius: 12px 12px 0 12px;
+    margin: 5px 0;
+    max-width: 80%;
+}
+
+/* Bot Bubble (Left) */
+.bot-bubble {
+    align-self: flex-start;
+    background: #f1f1f1;
+    color: #333;
+    padding: 10px;
+    border-radius: 12px 12px 12px 0;
+    margin: 5px 0;
+    max-width: 80%;
+    border: 1px solid #ddd;
+}
+
+/* Input Styles */
+.chat-input-field {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.chat-send-btn {
+    width: 100%;
+    padding: 8px;
+    background: #111;
+    color: #fff;
+    border: none;
+    margin-top: 5px;
+    cursor: pointer;
+}
+/* Ensure the container is a flexbox */
+#chatLog {
+    display: flex;
+    flex-direction: column;
+}
+
+/* User Bubble (Right) */
+.user-bubble {
+    align-self: flex-end;
+    background: #333;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 12px 12px 0 12px;
+    margin: 5px 0;
+}
+
+/* Bot Bubble (Left) */
+.bot-bubble {
+    align-self: flex-start;
+    background: #f1f1f1;
+    color: #333;
+    padding: 8px 12px;
+    border-radius: 12px 12px 12px 0;
+    margin: 5px 0;
+}/* --- MOBILE RESPONSIVENESS --- */
+
+@media (max-width: 768px) {
+    /* Header Adjustments */
+    .header-top { padding: 10px 3%; flex-wrap: wrap; }
+  
+    .brand-logo { font-size: 18px; order: 1; }
+    .right-tools { order: 2; }
+    
+    /* Navigation: Hide the horizontal bar */
+    .cat-nav {
+        display: none; /* Hide by default on mobile */
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: white;
+        border-bottom: 2px solid var(--gold);
+    }
+    
+    .cat-nav.mobile-active { display: block; }
+    
+    .cat-nav ul {
+        flex-direction: column;
+        gap: 0;
+        padding: 0;
+    }
+    
+    .cat-nav ul li { border-bottom: 1px solid #eee; width: 100%; }
+    .cat-nav ul li a { padding: 15px 5%; display: block; }
+    
+    /* Hide Mega Menu on Mobile (Better to use simple links or accordions) */
+ 
+    .image-col { display: none; }
+
+    /* Hero Slider */
+    .hero-text h2 { font-size: 28px; }
+    .hero-text p { font-size: 14px; padding: 0 10px; }
+    
+    /* Category Grid: Stack them 2-by-2 instead of 3 or 4 */
+    .cat-wrapper {
+        display: grid;
+        grid-template-columns: 1fr 1fr; /* Two items per row */
+        gap: 10px;
+        padding: 10px;
+    }
+    
+    .cat-box.large { grid-column: span 2; height: 250px; } /* Featured category stays wide */
+    .cat-box { height: 180px; }
+
+    /* Footer */
+    .footer-links-grid { grid-template-columns: 1fr; text-align: center; gap: 30px; }
+    .newsletter-form { flex-direction: column; }
+    
+    /* Modals */
+    .modal-content { width: 95%; padding: 20px; }
+}
+
+/* Add a Hamburger Button (Visible only on mobile) */
+.mobile-menu-toggle {
+    display: none;
+    font-size: 24px;
+    cursor: pointer;
+    margin-right: 15px;
+}
+
+@media (max-width: 768px) {
+    .mobile-menu-toggle { display: block; }
+}
+/* --- Sticky Mobile Bottom Nav --- */
+.mobile-bottom-nav {
+    display: none; /* Hidden on Desktop */
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: #ffffff;
+    border-top: 1px solid #e0e0e0;
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 0;
+    z-index: 1001; /* Above everything else */
+    box-shadow: 0 -2px 10px rgba(0,0,0,0.05);
+}
+
+.nav-item {
+    text-decoration: none;
+    color: #1a1a1a;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 11px;
+    font-weight: 500;
+    flex: 1;
+}
+
+.nav-item i {
+    font-size: 20px;
+    margin-bottom: 4px;
+}
+
+.nav-item.active {
+    color: #b2945e; /* Gold color for active state */
+}
+
+/* Badge for Cart Count */
+.nav-icon-wrapper {
+    position: relative;
+}
+
+.badge {
+    position: absolute;
+    top: -5px;
+    right: -10px;
+    background: #b2945e;
+    color: white;
+    font-size: 10px;
+    padding: 2px 6px;
+    border-radius: 50%;
+}
+
+/* Ensure the body has padding so content isn't hidden behind the bar */
+@media (max-width: 768px) {
+    body {
+        padding-bottom: 70px; /* Space for the bottom bar */
+    }
+    .mobile-bottom-nav {
+        display: flex; /* Show on Mobile */
+    }
+}
+
+/* Hide the Chatbot Launcher on mobile to avoid overlapping the nav bar */
+@media (max-width: 768px) {
+    .bot-launcher {
+        bottom: 80px; /* Push it up higher */
+    }
+}
+/* Ensure the modal shows up when 'active' class is added */
+.modal.active {
+    display: flex; /* Or whatever display property your other modals use */
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Style for the truck icon specifically */
+#track-btn {
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+#track-btn:hover {
+    color: #b8860b; /* Arhaus Gold */
+}
+.stepper-wrapper {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    margin-bottom: 20px;
+}
+
+/* The connecting line */
+.stepper-wrapper::before {
+    content: "";
+    position: absolute;
+    top: 18px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: #e0e0e0;
+    z-index: 1;
+}
+
+.step-item {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 25%;
+}
+
+.step-counter {
+    width: 40px;
+    height: 40px;
+    background: #fff;
+    border: 2px solid #e0e0e0;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+    transition: all 0.4s ease;
+    color: #ccc;
+}
+
+.step-name {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #999;
+    font-weight: 600;
+}
+
+/* Active State (Gold highlight) */
+.step-item.active .step-counter {
+    background: #b8860b;
+    border-color: #b8860b;
+    color: white;
+}
+
+.step-item.active .step-name {
+    color: #333;
+}
+/* Ensure the track modal can be seen */
+#track-modal.active {
+    display: flex !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    z-index: 9999;
+}
+
+/* Base style for the modal (hidden by default) */
+#track-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.6);
+    align-items: center;
+    justify-content: center;
+}
+.chat-window {
+    display: none;
+    flex-direction: column;
+    height: 400px; /* Give it a fixed height */
+}
+
+.chat-log {
+    flex: 1; /* This makes the log take up all space except input */
+    overflow-y: auto;
+    padding: 10px;
+}
+
+.chat-input-area {
+    display: flex;
+    padding: 10px;
+    border-top: 1px solid #eee;
+    background: #fff;
+}
+
+.chat-input-area input {
+    flex: 1;
+    border: 1px solid #ddd;
+    padding: 8px;
+    border-radius: 4px;
+    outline: none;
+}
+
+.chat-input-area button {
+    background: #b8860b;
+    color: white;
+    border: none;
+    padding: 0 15px;
+    margin-left: 5px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.user-entry {
+    background: #f0f0f0;
+    margin-left: 20%;
+    padding: 8px;
+    border-radius: 8px 8px 0 8px;
+    text-align: right;
+    margin-top: 5px;
+}
+/* Typing Animation Bubbles */
+.typing-indicator {
+    background-color: #f1f1f1;
+    padding: 10px 15px;
+    border-radius: 15px;
+    display: inline-block;
+    width: fit-content;
+    margin: 5px 0;
+}
+
+.typing-indicator span {
+    height: 8px;
+    width: 8px;
+    float: left;
+    margin: 0 1px;
+    background-color: #b8860b;
+    display: block;
+    border-radius: 50%;
+    opacity: 0.4;
+    animation: typing 1s infinite;
+}
+
+.typing-indicator span:nth-of-type(1) { animation-delay: 0s; }
+.typing-indicator span:nth-of-type(2) { animation-delay: 0.2s; }
+.typing-indicator span:nth-of-type(3) { animation-delay: 0.4s; }
+
+@keyframes typing {
+    0% { transform: translateY(0); opacity: 0.4; }
+    50% { transform: translateY(-5px); opacity: 1; }
+    100% { transform: translateY(0); opacity: 0.4; }
+}
+/* Container for all messages to add spacing */
+#chatLog p {
+    margin: 12px 0;
+    max-width: 85%;
+    line-height: 1.4;
+    position: relative;
+    padding: 10px 15px;
+    font-size: 14px;
+    animation: fadeIn 0.3s ease;
+}
+
+/* Bot Bubbles (Left aligned) */
+.bot-entry {
+    background: #f1f1f1;
+    color: #333;
+    border-radius: 15px 15px 15px 0;
+    align-self: flex-start;
+    border-left: 3px solid #b8860b; /* Arhaus Gold accent */
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.05);
+}
+
+/* User Bubbles (Right aligned) */
+.user-entry {
+    background: #b8860b;
+    color: white;
+    border-radius: 15px 15px 0 15px;
+    margin-left: auto !important; /* Pushes bubble to the right */
+    text-align: left;
+    box-shadow: -2px 2px 5px rgba(184, 134, 11, 0.2);
+}
+
+/* Fade in animation for new bubbles */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Ensure the chat log is a flex container for alignment */
+#chatLog {
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+}
+.chat-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #333;
+    color: #fff;
+    padding: 10px 15px;
+    font-family: 'Playfair Display', serif;
+}
+
+.chat-controls i:hover {
+    color: #b8860b; /* Turns gold when hovering */
+    transform: rotate(90deg);
+    transition: 0.3s;
+}
+.user-entry {
+    max-width: 80%; /* Prevents the bubble from touching the left side */
+    word-wrap: break-word; /* Ensures long text stays inside the bubble */
+}
+.product-image-container {
+    position: relative;
+}
+
+.wishlist-icon {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: white;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: 0.3s;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.wishlist-icon i {
+    color: #333;
+    transition: 0.3s;
+}
+
+/* When the item is in wishlist */
+.wishlist-icon.active i {
+    color: #e74c3c; /* Red heart */
+    font-weight: 900; /* Solid heart */
+}
+
+.wishlist-icon:hover {
+    transform: scale(1.1);
+}
+.wishlist-item-row button:first-of-type:hover {
+    background: #b8860b !important; /* Arhaus Gold on hover */
+    transition: 0.3s ease;
+}
+
+.wishlist-item-row button:last-of-type:hover {
+    color: #e74c3c !important; /* Trash icon turns red */
+}
+
+
+.admin-badge {
+    background: linear-gradient(135deg, #b8860b, #ffd700);
+    color: white;
+    font-size: 10px;
+    padding: 3px 8px;
+    border-radius: 12px;
+    margin-left: 8px;
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+    box-shadow: 0 2px 4px rgba(184, 134, 11, 0.3);
+}
+
+.role-badge {
+    background: linear-gradient(135deg, #4a00e0, #8e2de2);
+    color: white;
+    font-size: 11px;
+    padding: 4px 10px;
+    border-radius: 12px;
+    display: inline-block;
+    margin-top: 5px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* ==================== USER DROPDOWN ENHANCEMENTS ==================== */
+.user-profile-pill {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 15px;
+    background: #f8f9fa;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 1px solid #eee;
+}
+
+.user-profile-pill:hover {
+    background: #e9ecef;
+    transform: translateY(-1px);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+}
+
+.user-name {
+    font-weight: 600;
+    color: #333;
+    font-size: 14px;
+}
+
+.dropdown-arrow {
+    font-size: 12px;
+    color: #666;
+    transition: transform 0.3s;
+}
+
+.user-dropdown-menu.show .dropdown-arrow {
+    transform: rotate(180deg);
+}
+
+/* Dropdown menu */
+.user-dropdown-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    width: 280px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.15);
+    z-index: 1000;
+    display: none;
+    margin-top: 10px;
+    border: 1px solid #eee;
+}
+
+.user-dropdown-menu.show {
+    display: block;
+    animation: fadeInDown 0.3s;
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.dropdown-header {
+    padding: 15px;
+    border-bottom: 1px solid #eee;
+    background: #fafafa;
+    border-radius: 8px 8px 0 0;
+}
+
+.dropdown-header strong {
+    display: block;
+    color: #333;
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+
+.dropdown-header small {
+    display: block;
+    color: #666;
+    font-size: 13px;
+}
+
+.dropdown-item {
+    display: flex;
+    align-items: center;
+    padding: 12px 15px;
+    color: #333;
+    text-decoration: none;
+    transition: all 0.2s;
+    border-left: 3px solid transparent;
+}
+
+.dropdown-item:hover {
+    background: #f8f9fa;
+    color: #b8860b;
+    border-left-color: #b8860b;
+}
+
+.dropdown-item i {
+    width: 20px;
+    margin-right: 10px;
+    color: #666;
+}
+
+.dropdown-item:hover i {
+    color: #b8860b;
+}
+
+.dropdown-item.logout {
+    color: #e74c3c;
+}
+
+.dropdown-item.logout:hover {
+    background: #fee;
+    color: #c0392b;
+}
+
+.dropdown-item.logout i {
+    color: #e74c3c;
+}
+
+.badge {
+    background: #b8860b;
+    color: white;
+    font-size: 11px;
+    padding: 2px 6px;
+    border-radius: 10px;
+    margin-left: auto;
+}
+
+.dropdown-divider {
+    height: 1px;
+    background: #eee;
+    margin: 8px 0;
+}
+
+/* #debug-info {
+    display: none;
+} */
+
+#products-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 30px;
+    padding: 20px 0;
+}
+
+.product-card {
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+.product-image-container {
+    position: relative;
+    height: 250px;
+    overflow: hidden;
+}
+
+.product-image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.product-card:hover .product-image-container img {
+    transform: scale(1.05);
+}
+
+.wishlist-icon {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: white;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    z-index: 10;
+}
+
+.wishlist-icon:hover {
+    background: #b8860b;
+}
+
+.wishlist-icon:hover i {
+    color: white;
+}
+
+.wishlist-icon.active i {
+    color: #e74c3c;
+}
+
+.wishlist-icon i {
+    color: #666;
+    font-size: 18px;
+    transition: all 0.3s ease;
+}
+
+.product-info {
+    padding: 20px;
+}
+
+.product-info h3 {
+    margin: 0 0 10px 0;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #333;
+    line-height: 1.4;
+}
+
+.product-description {
+    color: #666;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin-bottom: 15px;
+    min-height: 40px;
+}
+
+.product-price {
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: #b8860b;
+    margin-bottom: 10px;
+}
+
+.product-stock {
+    margin-bottom: 15px;
+}
+
+.in-stock {
+    color: #2ecc71;
+    font-size: 0.85rem;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.out-of-stock {
+    color: #e74c3c;
+    font-size: 0.85rem;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.add-to-cart-btn {
+    width: 100%;
+    padding: 12px;
+    background: #333;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.add-to-cart-btn:hover:not(:disabled) {
+    background: #b8860b;
+    transform: translateY(-2px);
+}
+
+.add-to-cart-btn:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+}
+
+.add-to-cart-btn i {
+    font-size: 1rem;
+}
+
+/* Loading spinner */
+#loading-products {
+    text-align: center;
+    padding: 50px;
+}
+
+.fa-spinner {
+    color: #b8860b;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    #products-container {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    #products-container {
+        grid-template-columns: 1fr;
+    }
+
+    .product-image-container {
+        height: 200px;
+    }
+}

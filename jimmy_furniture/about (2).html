@@ -1,0 +1,87 @@
+<section class="about" id="about">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <style>
+        /* CSS - ዲዛይኑን እና ፎንቱን የሚያስተካክል */
+        .about {
+            padding: 60px 20px;
+            font-family: 'Poppins', sans-serif; /* እዚህ ጋር ነው ፎንቱ የሚቀየረው */
+            background-color: #ffffff;
+        }
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            color: #333;
+            margin-bottom: 40px;
+            font-weight: 600;
+        }
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            flex-wrap: wrap;
+            /* Animation ዝግጅት */
+            opacity: 1; 
+        }
+        .about-text {
+            flex: 1;
+            min-width: 300px;
+        }
+        .about-text h3 {
+            font-size: 1.8rem;
+            color: #b5835a;
+            margin-bottom: 15px;
+        }
+        .about-text p {
+            line-height: 1.8;
+            color: #555;
+            font-size: 1rem;
+        }
+        .about-image {
+            flex: 1;
+            min-width: 300px;
+        }
+        .about-image img {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        /* ለሞባይል እንዲመች */
+        @media (max-width: 768px) {
+            .about-content { flex-direction: column; text-align: center; }
+        }
+    </style>
+
+    <div class="container">
+        <h2 class="section-title">About Us</h2>
+        <div class="about-content">
+            <div class="about-text">
+                <h3>Welcome to Jimmy Furniture</h3>
+                <p>We've been providing quality furniture to families since 2010 E.C. Our mission is to make beautiful, comfortable furniture affordable for everyone.</p>
+                <p>All our products are made with care and attention to detail.</p>
+            </div>
+            <div class="about-image">
+                <img src="https://www.arhaus.com/cdn/shop/files/Oct25_MegaMenu_Dining.jpg?v=1759243893&width=2000" alt="Our Store">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ቀላል የጃቫ ስክሪፕት - ፔጁ ሲከፈት ጽሁፉ እንዲንቀሳቀስ
+        document.addEventListener('DOMContentLoaded', function() {
+            const content = document.querySelector('.about-content');
+            content.style.transition = "transform 1s ease, opacity 1s ease";
+            content.style.transform = "translateY(20px)";
+            content.style.opacity = "0";
+            
+            setTimeout(() => {
+                content.style.transform = "translateY(0)";
+                content.style.opacity = "1";
+            }, 100);
+        });
+    </script>
+</section>

@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Orders - Jimmy Furniture</title>
+    <link rel="stylesheet" href="x.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <!-- Header (same as index.html) -->
+
+
+    <main style="padding: 50px 5%; max-width: 1200px; margin: 0 auto;">
+        <h1 style="font-family: 'Playfair Display', serif; margin-bottom: 30px;">My Orders</h1>
+
+        <div style="margin-bottom: 30px;">
+            <button onclick="window.location.href='index.php'" style="background: #333; color: white; border: none; padding: 10px 22px;
+                            border-radius: 4px; cursor: pointer; font-weight: 600;">
+                <i class="fas fa-arrow-left"></i> Back to Home
+            </button>
+        </div>
+
+        <div id="orders-container">
+            <!-- Orders will be loaded here -->
+        </div>
+
+        <div id="loading-orders" style="text-align: center; padding: 50px;">
+            <i class="fas fa-spinner fa-spin fa-2x" style="color: #b8860b;"></i>
+            <p style="margin-top: 20px; color: #666;">Loading your orders...</p>
+        </div>
+
+        <div id="no-orders" style="text-align: center; padding: 80px 20px; display: none;">
+            <i class="fas fa-shopping-cart fa-3x" style="color: #ddd; margin-bottom: 20px;"></i>
+            <h3 style="color: #666; margin-bottom: 10px;">No Orders Yet</h3>
+            <p style="color: #999; margin-bottom: 30px;">You haven't placed any orders yet.</p>
+            <button onclick="window.location.href='category-living.html'"
+                style="background: #b8860b; color: white; border: none; padding: 12px 30px; border-radius: 4px; cursor: pointer; font-weight: 600;">
+                <i class="fas fa-shopping-bag"></i> Start Shopping
+            </button>
+        </div>
+    </main>
+
+    <!-- Footer -->
+
+    <script>
+        async function loadUserOrders() {
+            try {
+                // // Check if user is logged in
+                // const authResponse = await fetch('/jimmy_furniture/api/check_auth.php');
+                // const authData = await authResponse.json();
+
+                // if (!authData.authenticated) {
+                //     window.location.href = 'index.html';
+                //     return;
+                // }
+
+                // Load orders
+                const response = await fetch('/jimmy_furniture/api/orders.php');
+                const data = await response.json();
+
+                const container = document.getElementById('orders-container');
+                const loading = document.getElementById('loading-orders');
+                const noOrders = document.getElementById('no-orders');
+
+                if (data.success && data.data && data.data.length > 0) {
+                    container.innerHTML = data.data.map(order => `
+                        <div class="order-card" style="border: 1px solid #eee; border-radius: 8px; padding: 20px; margin-bottom: 20px;">
+                            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 15px;">
+                                <div>
+                                    <h3 style="margin: 0 0 5px;">Order #${order.order_number}</h3>
+                                    <p style="color: #666; margin: 0;">Placed on ${new Date(order.created_at).toLocaleDateString()}</p>
+                                </div>
+                                <div>
+                                    <span style="padding: 5px 10px; border-radius: 4px; background: ${getStatusColor(order.status)}; color: ${getStatusTextColor(order.status)};">
+                                        ${order.status.charAt(0).toUpperCase() + order.status.slice(1)}
+                                    </span>
+                                </div>
+                            </div>
+                            
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <div>
+                                    <p style="margin: 0; color: #666;">${order.item_count || 0} items</p>
+                                    <p style="margin: 5px 0 0; font-weight: bold; color: #b8860b;">$${order.total_amount || '0.00'}</p>
+                                </div>
+                                <div>
+                                    <button onclick="viewOrder(${order.id})" 
+                                            style="background: #333; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; margin-right: 10px;">
+                                        <i class="fas fa-eye"></i> View Details
+                                    </button>
+                                    ${order.status === 'pending' ? `
+                                        <button onclick="cancelOrder(${order.id})" 
+                                                style="background: none; border: 1px solid #e74c3c; color: #e74c3c; padding: 8px 16px; border-radius: 4px; cursor: pointer;">
+                                            Cancel Order
+                                        </button>
+                                    ` : ''}
+                                </div>
+                            </div>
+                        </div>
+                    `).join('');
+
+                    noOrders.style.display = 'none';
+                } else {
+                    container.innerHTML = '';
+                    noOrders.style.display = 'block';
+                }
+
+                loading.style.display = 'none';
+
+            } catch (error) {
+                console.error('Failed to load orders:', error);
+                document.getElementById('orders-container').innerHTML = `
+                    <div style="text-align: center; padding: 50px; background: #f8f8f8; border-radius: 8px;">
+                        <i class="fas fa-exclamation-triangle fa-2x" style="color: #e74c3c; margin-bottom: 20px;"></i>
+                        <h3 style="color: #666;">Error Loading Orders</h3>
+                        <p style="color: #999;">Please try again later.</p>
+                        <button onclick="window.location.reload()" 
+                                style="background: #b8860b; color: white; border: none; padding: 10px 20px; border-radius: 4px; margin-top: 20px; cursor: pointer;">
+                            <i class="fas fa-redo"></i> Try Again
+                        </button>
+                    </div>
+                `;
+                document.getElementById('loading-orders').style.display = 'none';
+            }
+        }
+
+        function getStatusColor(status) {
+            switch (status) {
+                case 'pending': return '#fff3cd';
+                case 'processing': return '#cce5ff';
+                case 'shipped': return '#d4edda';
+                case 'delivered': return '#d1ecf1';
+                case 'cancelled': return '#f8d7da';
+                default: return '#e2e3e5';
+            }
+        }
+
+        function getStatusTextColor(status) {
+            switch (status) {
+                case 'pending': return '#856404';
+                case 'processing': return '#004085';
+                case 'shipped': return '#155724';
+                case 'delivered': return '#0c5460';
+                case 'cancelled': return '#721c24';
+                default: return '#383d41';
+            }
+        }
+
+       function viewOrder(orderId) {
+            window.location.href = `order-details.html?id=${orderId}`;
+    }
+
+        async function cancelOrder(orderId) {
+            if (!confirm('Are you sure you want to cancel this order?')) {
+                return;
+            }
+
+            try {
+                const response = await fetch('/jimmy_furniture/api/orders.php', {
+                    method: 'DELETE',
+                    credentials: 'include',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ order_id: orderId })
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    alert('Order cancelled successfully');
+                    loadUserOrders();
+                } else {
+                    alert(data.error || 'Failed to cancel order');
+                }
+            } catch (error) {
+                console.error('Cancel order error:', error);
+                alert('Network error. Please try again.');
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', loadUserOrders);
+    </script>
+</body>
+
+</html>

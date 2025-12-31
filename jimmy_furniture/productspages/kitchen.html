@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kitchen Furniture - Jimmy Furniture</title>
+    <link rel="stylesheet" href="./css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+    <script src="../x.js"></script>
+</head>
+
+<body>
+    
+    
+
+    <div class="category-container">
+        <div class="category-header">
+            <h1>Kitchen Collection</h1>
+            
+            <button onclick="window.location.href='../index.php'" class="back-home-btn" style="margin-top: 20px;">
+                <i class="fas fa-home"></i> Back to Home
+            </button>
+
+            <input type="text" class="search-input" id="searchInput" placeholder="Search...">
+        </div>
+
+        <div class="products-grid" id="products-container">
+            
+        </div>
+
+        <div id="loading-products" style="text-align: center; padding: 50px;">
+            <i class="fas fa-spinner fa-spin fa-2x" style="color: #b8860b;"></i>
+            <p style="margin-top: 20px; color: #666;">Loading office products...</p>
+        </div>
+
+        <div id="error-message" style="display: none; text-align: center; padding: 50px;">
+            <i class="fas fa-exclamation-triangle fa-3x" style="color: #e74c3c; margin-bottom: 20px;"></i>
+            <h3 style="color: #666; margin-bottom: 10px;">Error Loading Products</h3>
+            <p style="color: #999; margin-bottom: 30px;">Unable to load products. Please try again later.</p>
+            <div style="display: flex; gap: 10px; justify-content: center;">
+                <button onclick="OfficePage.loadProducts()" class="shop-btn-gold">
+                    <i class="fas fa-redo"></i> Retry
+                </button>
+                <button onclick="window.location.href='index.html'" class="back-home-btn">
+                    <i class="fas fa-home"></i> Back to Home
+                </button>
+                
+            </div>
+        </div>
+    </div>
+
+    
+
+    <script>
+        
+        const OfficePage = (() => {
+            // Cache DOM elements
+            let container, loading, errorMessage;
+
+            // Initialize module
+            function init() {
+                container = document.getElementById('products-container');
+                loading = document.getElementById('loading-products');
+                errorMessage = document.getElementById('error-message');
+
+                loadProducts();
+            }
+
+            // Feature tag extractor
+            const featureTags = {
+                ergonomic: /ergonomic|lumbar/i,
+                adjustable: /adjustable|height/i,
+                executive: /executive|luxury/i,
+                storage: /storage|cabinet/i,
+                modern: /modern|contemporary/i,
+                wood: /wood|solid/i
+            };
+
+            // Get feature tags efficiently
+            function getFeatureTags(description = '') {
+                const tags = [];
+                const desc = description.toLowerCase();
+
+                for (const [tag, regex] of Object.entries(featureTags)) {
+                    if (regex.test(desc) && tags.length < 3) {
+                        tags.push(tag.charAt(0).toUpperCase() + tag.slice(1));
+                    }
+                }
+
+                return tags.length ? tags : ['Office', 'Professional'];
+            }
+
+
+            // Load products
+            async function loadProducts() {
+                if (!container) return;
+
+                try {
+                    // Show loading state
+                    loading.style.display = 'block';
+                    errorMessage.style.display = 'none';
+                    container.innerHTML = '';
+
+                    // Fetch products
+                    const response = await fetch('/jimmy_furniture/api/productPages.php?category=kitchen');
+
+                    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+
+                    const data = await response.json();
+
+                    // Handle response
+                    if (data.success && data.data?.length) {
+                        renderProducts(data.data);
+                    } else {
+                        showEmptyState();
+                    }
+
+                    loading.style.display = 'none';
+
+                } catch (error) {
+                    console.error('Failed to load products:', error);
+                    handleError();
+                }
+            }
+
+            // Render products efficiently
+            function renderProducts(products) {
+                const fragment = document.createDocumentFragment();
+
+                products.forEach(product => {
+                    const stockStatus = getStockStatus(product.stock_quantity);
+                    const features = getFeatureTags(product.description);
+                    const inWishlist = isInWishlist(product.id);
+
+                    const card = createProductCard(product, stockStatus, features, inWishlist);
+                    fragment.appendChild(card);
+                });
+
+                container.appendChild(fragment);
+            }
+
+            // Create product card
+     function createProductCard(product, stockStatus, features, inWishlist) {
+                const div = document.createElement('div');
+                div.className = 'product-card';
+                div.setAttribute('data-id', product.id);
+
+                div.innerHTML = `
+    <img src="${product.image_url || 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?q=80&w=400'}" 
+         alt="${product.name}" 
+         class="product-image" 
+         onclick="window.location.href='product-detail.html?id=${product.id}'">
+    
+    <div class="product-info">
+        <div class="stock-status ${stockStatus.class}">${stockStatus.text}</div>
+        <h3 class="product-title" onclick="window.location.href='product-detail.html?id=${product.id}'">${product.name}</h3>
+        <p class="product-description">${product.description || 'Professional office furniture designed for productivity and comfort.'}</p>
+        
+        ${features.length ? `
+            <div class="product-features">
+                ${features.map(feature => `<span class="feature-tag">${feature}</span>`).join('')}
+            </div>
+        ` : ''}
+        
+        <div class="product-price">$${parseFloat(product.price).toFixed(2)}</div>
+        
+        <div class="product-actions">
+            <button class="add-to-cart-btn"
+                onclick="addToCart(
+                    ${product.id},
+                    '${product.name.replace(/'/g, "\\'")}',
+                    ${product.price},
+                    '${product.image_url || ''}'
+                )"
+                ${product.stock_quantity === 0 ? 'disabled' : ''}>
+                <i class="fas fa-shopping-cart"></i> Add to Cart
+            </button>
+            <div class="secondary-actions">
+                <button class="detail-view-btn" onclick="window.location.href='product-detail.html?id=${product.id}'">
+                    <i class="fas fa-eye"></i> Detail View
+                </button>
+                <button class="wishlist-btn ${inWishlist ? 'active' : ''}"
+                    onclick="toggleWishlist(
+                        ${product.id},
+                        '${product.name.replace(/'/g, "\\'")}',
+                        ${product.price},
+                        '${product.image_url || ''}'
+                    )">
+                    <i class="${inWishlist ? 'fas' : 'far'} fa-heart"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+    `;
+
+                return div;
+            }
+            // Get stock status
+            function getStockStatus(quantity) {
+                if (quantity > 10) return { class: 'in-stock', text: 'In Stock' };
+                if (quantity > 0) return { class: 'low-stock', text: `Low Stock (${quantity} left)` };
+                return { class: 'out-of-stock', text: 'Out of Stock' };
+            }
+
+            // Show empty state
+            function showEmptyState() {
+                container.innerHTML = `
+                <div class="empty-state">
+                    <i class="fas fa-desktop"></i>
+                    <h3>No Office Products Found</h3>
+                    <p>Check back soon for new office furniture arrivals.</p>
+                    <div style="display: flex; gap: 10px; justify-content: center; margin-top: 20px;">
+                        <button class="shop-btn-gold" onclick="window.location.href='index.html'">
+                            <i class="fas fa-home"></i> Back to Home
+                        </button>
+                    </div>
+                </div>
+            `;
+            }
+
+            // Handle error
+            function handleError() {
+                loading.style.display = 'none';
+                container.innerHTML = '';
+                errorMessage.style.display = 'block';
+            }
+
+            // View product detail
+            function viewDetail(productId) {
+                window.location.href = `product-detail.html?id=${productId}`;
+            }
+
+            // Show toast notification
+            function showToast(message) {
+                
+                const existing = document.querySelector('.toast-message');
+                if (existing) existing.remove();
+
+                // Create new toast
+                const toast = document.createElement('div');
+                toast.className = 'toast-message';
+                toast.textContent = message;
+
+                // styles
+                if (!document.querySelector('#toast-styles')) {
+                    const style = document.createElement('style');
+                    style.id = 'toast-styles';
+                    style.textContent = `
+                    .toast-message {
+                        position: fixed;
+                        bottom: 20px;
+                        right: 20px;
+                        background: #333;
+                        color: white;
+                        padding: 12px 24px;
+                        border-radius: 4px;
+                        z-index: 10000;
+                        animation: toastSlideIn 0.3s ease-out;
+                        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+                    }
+                    @keyframes toastSlideIn {
+                        from { transform: translateX(100%); opacity: 0; }
+                        to { transform: translateX(0); opacity: 1; }
+                    }
+                    @keyframes toastSlideOut {
+                        from { transform: translateX(0); opacity: 1; }
+                        to { transform: translateX(100%); opacity: 0; }
+                    }
+                `;
+                    document.head.appendChild(style);
+                }
+
+                document.body.appendChild(toast);
+
+                // Auto remove
+                setTimeout(() => {
+                    toast.style.animation = 'toastSlideOut 0.3s ease-out';
+                    setTimeout(() => toast.remove(), 300);
+                }, 3000);
+            }
+
+            // Public API
+            return {
+                init,
+                loadProducts,
+                viewDetail
+            };
+        })();
+
+        // Initialize when DOM is ready
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', OfficePage.init);
+        } else {
+            OfficePage.init();
+        }
+    </script>
+
+</body>
+
+</html>

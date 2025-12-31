@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jimmy Furniture</title>
+    <link rel="stylesheet" href="x.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+
+    <header class="arhaus-header">
+        <div class="header-top">
+            
+            <div class="logo-container">
+                <h1 class="brand-logo">JIMMY<span>FURNITURE</span></h1>
+            </div>
+            <div class="right-tools">
+
+                
+
+                <div id="auth-status-container">
+                    <button class="action-btn" id="user-btn" onclick="toggleAuth()">
+                        <i class="far fa-user"></i>
+                        <span class="action-label">Account</span>
+                    </button>
+                </div>
+
+                <!-- Cart button with count badge -->
+                <div class="tool-item" onclick="toggleCartModal()" style="cursor:pointer; position: relative;">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span id="cart-count" style="font-size: 12px; color: #b8860b; display: none;">0</span>
+                </div>
+
+                <!-- Wishlist button with count badge -->
+                <div class="tool-item" onclick="toggleWishlistModal()" style="cursor:pointer; position: relative;">
+                    <i class="fas fa-heart"></i>
+                    <span id="wishlist-count" style="font-size: 12px; color: #b8860b; display: none;">0</span>
+                </div>
+            </div>
+        </div>
+
+        <nav class="cat-nav">
+            <ul>
+                <li class="dropdown">
+                    <a href="./productspages/living.html">LIVING</a>
+                  
+                </li>
+                <li class="dropdown">
+                    <a href="./productspages/dining.html">DINING</a>
+                   
+                </li>
+                <li class="dropdown">
+                    <a href="./productspages/bedroom.html">BEDROOM</a>
+                  
+                <li class="dropdown">
+                    <a href="./productspages/office.html">OFFICE</a>
+                    
+                </li>
+                <li class="dropdown">
+                    <a href="./productspages/kitchen.html">KITCHEN</a>
+                  
+                </li>
+                 <li class="dropdown">
+                    <a href="./productspages/door.html">DOORS</a>
+                  
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero-slider">
+        <div class="slider-track">
+            <div class="slide"
+                style="background-image: url('https://images.unsplash.com/photo-1616594039964-ae9021a400a0?q=80&w=2000');">
+            </div>
+            <div class="slide"
+                style="background-image: url('https://images.unsplash.com/photo-1524758631624-e2822e304c36?q=80&w=2000');">
+            </div>
+            <div class="slide"
+                style="background-image: url('https://images.unsplash.com/photo-1586023492125-27b2c045efd7?q=80&w=2000');">
+            </div>
+            <div class="slide"
+                style="background-image: url('https://images.unsplash.com/photo-1550581190-9c1c48d21d6c?q=80&w=2000');">
+            </div>
+            <div class="slide"
+                style="background-image: url('https://images.unsplash.com/photo-1584622650111-993a426fbf0a?q=80&w=2000');">
+            </div>
+        </div>
+
+        <div class="hero-overlay">
+            <div class="hero-text">
+                <h2>Quality furniture at affordable prices</h2>
+                <div class="divider"></div>
+                <p>Your Number One Choice.
+                </p>
+                <a href="./productspages/living.html" class="shop-btn">DISCOVER THE COLLECTION</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="cat-section">
+        <div class="section-title">
+            <h2>Shop by Space</h2>
+            <div class="line"></div>
+        </div>
+        <div class="cat-wrapper">
+            <div class="cat-box large" onclick="location.href='./productspages/living.html'">
+                <img src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&w=2000" alt="Living">
+                <div class="cat-label">Living Room <span>View All</span></div>
+
+            </div>
+            <div class="cat-box" onclick="location.href='./productspages/office.html'">
+                <img src="https://images.unsplash.com/photo-1518455027359-f3f8164ba6bd?q=80&w=800" alt="Office">
+                <div class="cat-label">Office</div>
+            </div>
+            <div class="cat-box" onclick="location.href='./productspages/bedroom.html'">
+                <img src="https://images.unsplash.com/photo-1540518614846-7eded433c457?q=80&w=800" alt="Bedroom">
+                <div class="cat-label">Bedroom</div>
+            </div>
+            <div class="cat-box" onclick="location.href='./productspages/kitchen.html'">
+                <img src="https://images.unsplash.com/photo-1556912173-3bb406ef7e77?q=80&w=2000" alt="kitchen">
+                <div class="cat-label">kitchen</div>
+            </div>
+            <div class="cat-box" onclick="location.href='./productspages/dining.html'">
+                <img src="https://images.unsplash.com/photo-1519643381401-22c77e60520e?q=80&w=2000" alt="dining">
+                <div class="cat-label">dining</div>
+            </div>
+            <div class="cat-box" onclick="location.href='./productspages/door.html'">
+                <img src="https://images.unsplash.com/photo-1574362848149-11496d93a7c7?q=80&w=2000" alt="door">
+                <div class="cat-label">door</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="bundle-banner-full">
+        <div class="bundle-inner">
+            <div class="bundle-text-content">
+                <span class="gold-tag">A LEGACY OF COMFORT</span>
+                <h2>J</h2>
+                <div class="luxury-line"></div>
+                <p>Your home is a reflection of your journey.</p>
+
+                <div class="bundle-buttons">
+                    <a href="./productspages/living.html" class="shop-btn-gold">BEGIN YOUR TRANSFORMATION</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="main-footer">
+        <div class="footer-container">
+            <div class="footer-brand-section">
+                <h2 class="footer-logo">JIMMY<span>FURNITURE</span></h2>
+                <p>Sign up to receive our curated interior design tips and exclusive collection previews.</p>
+                
+            </div>
+
+            <div class="footer-links-grid">
+                <div class="link-column">
+                    <h4>Collections</h4>
+                    <ul>
+                        <li><a href="./productspages/living.html">Living Room</a></li>
+                        <li><a href="./productspages/kitchen.html">Kitchen</a></li>
+                        <li><a href="./productspages/bedroom.html">Bedroom</a></li>
+                        <li><a href="./productspages/dining.html">Dining</a></li>
+                        <li><a href="./productspages/office.html">Office</a></li>
+                        <li><a href="./productspages/door.html">Door</a></li>
+                    </ul>
+                </div>
+
+                <div><a href="./about (2).html" >About us</a></div>
+
+                <div class="link-column">
+                    <h4>Customer Care</h4>
+                    <ul>
+                        <li>Email@jimmyfurniture@gmail.com</li>
+                        <li>Phone:+2519008967543</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>Jimmy Furniture. Crafted for Comfort.</p>
+            <div class="social-links">
+                <a href="#"><i class='bx bxl-instagram'></i></a>
+                <a href="#"><i class='bx bxl-pinterest'></i></a>
+                <a href="#"><i class='bx bxl-facebook'></i></a>
+            </div>
+        </div>
+    </footer>
+    <!-- Login Modal -->
+
+
+    <!-- Cart Modal -->
+    <div class="modal" id="cart-modal">
+        <div class="modal-content cart-modal">
+            <button class="modal-close" id="cart-close">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="modal-header">
+                <h2 class="modal-title">Your Shopping Cart</h2>
+                <p class="cart-count"><span id="cart-items-count">0</span> items</p>
+            </div>
+
+            <div class="cart-items" id="cart-items-list">
+                <!-- Cart items will be loaded here -->
+            </div>
+
+            <div class="cart-summary">
+                
+                <div class="summary-row">
+                    <span>Shipping</span>
+                    <span class="summary-value">Calculated at checkout</span>
+                </div>
+             
+
+                <button class="checkout-btn" id="checkout-btn">Proceed to Checkout</button>
+               
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Checkout Modal -->
+    <div class="modal" id="checkout-modal">
+        <div class="modal-content checkout-modal">
+            <button class="modal-close" id="checkout-close">
+                <i class="fas fa-times"></i>
+            </button>
+
+            <div class="checkout-header">
+                <h2 class="modal-title">Checkout</h2>
+                <div class="checkout-steps">
+                    <div class="step active">
+                        <div class="step-number">1</div>
+                        <span class="step-label">Information</span>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <span class="step-label">Shipping</span>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <span class="step-label">Payment</span>
+                    </div>
+                </div>
+            </div>
+
+            <form class="checkout-form" id="checkout-form">
+                <div class="checkout-section">
+                    <h3 class="section-title">Customer Information</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="checkout-firstname">First Name *</label>
+                            <input type="text" id="checkout-firstname" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="checkout-lastname">Last Name *</label>
+                            <input type="text" id="checkout-lastname" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="checkout-email">Email Address *</label>
+                        <input type="email" id="checkout-email" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="checkout-phone">Phone Number *</label>
+                        <input type="tel" id="checkout-phone" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="checkout-address">Shipping Address *</label>
+                        <textarea id="checkout-address" rows="3" required></textarea>
+                    </div>
+                </div>
+
+                <div class="checkout-section">
+                    <h3 class="section-title">Payment Method</h3>
+                    <div class="payment-options">
+                        <div class="payment-option">
+                            <input type="radio" id="chapa-payment" name="payment" value="chapa" checked>
+                            <label for="chapa-payment">
+                                <div class="payment-icon chapa-icon">
+                                    <i class="fas fa-credit-card"></i>
+                                </div>
+                                <div class="payment-info">
+                                    <span class="payment-name">Chapa Payment</span>
+                                    <span class="payment-desc">Secure payment via Chapa</span>
+                                </div>
+                            </label>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="checkout-summary">
+                    <h3 class="section-title">Order Summary</h3>
+                    <div class="summary-items">
+                        <span>Total</span>
+                        <!-- Order items will be added here -->
+                    </div>
+
+                    <div class="summary-totals">
+                        <div class="total-row">
+                            <span>Subtotal</span>
+                            
+                        </div>
+                        <div class="total-row">
+                            <span>Shipping</span>
+                            <span>Birr49.99</span>
+                        </div>
+                        <div class="total-row">
+                            <span>Discount</span>
+                            <span class="discount">-Birr0.00</span>
+                        </div>
+                        <div class="total-row grand-total">
+                            
+                        </div>
+                    </div>
+                </div>
+                <button onclick="showCheckout()" class="checkout-btn">Proceed to Checkout</button>
+                <button type="submit" class="place-order-btn">Place Order</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Delivery Info Modal 
+    <div class="modal" id="delivery-modal">
+        <div class="modal-content">
+            <button class="modal-close" id="delivery-close">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="modal-header">
+                <h2 class="modal-title">Delivery Information</h2>
+            </div>
+
+            <div class="delivery-content">
+                <div class="delivery-option">
+                    <div class="delivery-icon">
+                        <i class="fas fa-shipping-fast"></i>
+                    </div>
+                    <div class="delivery-info">
+                        <h3>Standard Delivery</h3>
+                        <p>3-5 business days · $9.99</p>
+                        <p class="delivery-desc">Free on orders over $500</p>
+                    </div>
+                </div>
+
+                <div class="delivery-option">
+                    <div class="delivery-icon">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <div class="delivery-info">
+                        <h3>Express Delivery</h3>
+                        <p>1-2 business days · $19.99</p>
+                        <p class="delivery-desc">Order before 2pm for same-day dispatch</p>
+                    </div>
+                </div>
+
+                <div class="delivery-option">
+                    <div class="delivery-icon">
+                        <i class="fas fa-couch"></i>
+                    </div>
+                    <div class="delivery-info">
+                        <h3>White Glove Service</h3>
+                        <p>5-7 business days · $49.99</p>
+                        <p class="delivery-desc">Includes assembly and removal of packaging</p>
+                    </div>
+                </div>
+
+                <div class="delivery-notice">
+                    <i class="fas fa-info-circle"></i>
+                    <p>All our deliveries include tracking. You'll receive updates via email and SMS.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <Wishlist Modal -->
+    <div class="modal" id="wishlist-modal">
+        <div class="modal-content">
+            <button class="modal-close" id="wishlist-close">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="modal-header">
+                <h2 class="modal-title">Your Wishlist</h2>
+                <p class="wishlist-count"><span id="wishlist-items-count"></span> items</p>
+            </div>
+
+            <div class="wishlist-items" id="wishlist-items-list">
+                <!-- Wishlist items will be loaded here -->
+            </div>
+
+            <div class="wishlist-empty" id="wishlist-empty">
+                <i class="far fa-heart"></i>
+                <h3>Your wishlist is empty</h3>
+                <p>Save your favorite items here to purchase later</p>
+                <button class="browse-btn">Browse Products</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="auth-modal" class="modal">
+        <div class="modal-content auth-card">
+            <button class="modal-close" onclick="toggleAuth()">
+                <i class="fas fa-times"></i>
+            </button>
+
+            <div class="auth-tabs">
+                <button id="loginBtn" class="active" onclick="switchTab('login')">LOGIN</button>
+                <button id="signupBtn" onclick="switchTab('signup')">SIGN UP</button>
+            </div>
+
+            <form id="login-form" class="auth-form" action="login.php" method="POST">
+                <h2>Welcome Back</h2>
+                <p>Enter your details to access your account</p>
+                <div class="form-group">
+                    <label for="login-email">Email Address</label>
+                    <input type="email" id="login-email" name="email" placeholder="Enter your email" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="login-password">Password</label>
+                    <input type="password" id="login-password" name="password" placeholder="Enter your password"
+                        required>
+                </div>
+
+                <button type="submit" class="submit-btn">Login</button>
+
+                <p>new here? <a href="#" onclick="switchTab('signup')">create an account</a></p>
+            </form>
+
+
+            <form id="signup-form" class="auth-form" style="display: none;">
+                <h2>Create Account</h2>
+                <p>Join Jimmy Furniture for exclusive benefits</p>
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" id="signup-name" placeholder="Enter your full name" required>
+                </div>
+                <div class="form-group">
+                    <label>Email Address</label>
+                    <input type="email" id="signup-email" placeholder="Enter your email" required>
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="signup-password" placeholder="Create a password" required>
+                </div>
+                <div class="form-group">
+                    <label>Confirm Password</label>
+                    <input type="password" id="signup-confirm" placeholder="Confirm your password" required>
+                </div>
+                <button type="submit" class="submit-btn">Create Account</button>
+            </form>
+        </div>
+    </div>
+    <div id="custom-track-modal" class="modal"
+        style="display:none; position:fixed; z-index:9999; left:0; top:0; width:100%; height:100%; background-color:rgba(0,0,0,0.7); align-items:center; justify-content:center;">
+        <div class="modal-content"
+            style="background:#fff; padding:30px; width:90%; max-width:500px; position:relative; border-radius:8px;">
+            <span onclick="closeTrackModal()"
+                style="position:absolute; right:20px; top:15px; font-size:24px; cursor:pointer;">&times;</span>
+
+            <h2 style="margin-bottom:10px; font-family: 'Playfair Display', serif;">Track Order</h2>
+            <p style="color:#666; margin-bottom:20px;">Enter your order number to see progress.</p>
+
+            <input type="text" id="order-input" placeholder="e.g. #JIMMY123"
+                style="width:100%; padding:12px; margin-bottom:15px; border:1px solid #ddd; border-radius:4px;">
+            <button onclick="startTracking()" class="submit-btn"
+                style="width:100%; background:#b8860b; color:white; border:none; padding:12px; cursor:pointer; font-weight:bold;">TRACK
+                NOW</button>
+
+            <div id="tracking-visual" style="display:none; margin-top:30px;">
+                <div class="stepper-container" style="display:flex; justify-content:space-between; position:relative;">
+                    <div
+                        style="position:absolute; top:15px; left:10%; right:10%; height:2px; background:#ddd; z-index:1;">
+                    </div>
+
+                    <div class="track-step" id="t-step-1" style="z-index:2; text-align:center;">
+                        <div class="dot"
+                            style="width:30px; height:30px; border-radius:50%; background:#ddd; margin:0 auto; display:flex; align-items:center; justify-content:center; color:white;">
+                            <i class="fas fa-check"></i></div>
+                        <span style="font-size:10px; display:block; margin-top:5px;">PLACED</span>
+                    </div>
+                    <div class="track-step" id="t-step-2" style="z-index:2; text-align:center;">
+                        <div class="dot"
+                            style="width:30px; height:30px; border-radius:50%; background:#ddd; margin:0 auto; display:flex; align-items:center; justify-content:center; color:white;">
+                            <i class="fas fa-hammer"></i></div>
+                        <span style="font-size:10px; display:block; margin-top:5px;">MAKING</span>
+                    </div>
+                    <div class="track-step" id="t-step-3" style="z-index:2; text-align:center;">
+                        <div class="dot"
+                            style="width:30px; height:30px; border-radius:50%; background:#ddd; margin:0 auto; display:flex; align-items:center; justify-content:center; color:white;">
+                            <i class="fas fa-truck"></i></div>
+                        <span style="font-size:10px; display:block; margin-top:5px;">SHIPPED</span>
+                    </div>
+                </div>
+                <p id="status-msg" style="text-align:center; margin-top:20px; font-weight:bold; color:#b8860b;"></p>
+            </div>
+        </div>
+    </div>
+    <div id="checkout-page" style="display:none; padding: 50px 5%; background: #f9f9f9;">
+        <div class="checkout-container"
+            style="display: grid; grid-template-columns: 1.5fr 1fr; gap: 40px; max-width: 1200px; margin: 0 auto;">
+
+            <div class="checkout-form"
+                style="background: #fff; padding: 30px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
+                <h2 style="font-family: 'Playfair Display', serif; margin-bottom: 20px;">Shipping Details</h2>
+                <form id="order-form">
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 15px;">
+                        <input type="text" placeholder="First Name" required
+                            style="padding: 12px; border: 1px solid #ddd;">
+                        <input type="text" placeholder="Last Name" required
+                            style="padding: 12px; border: 1px solid #ddd;">
+                    </div>
+                    <input type="email" placeholder="Email Address" required
+                        style="width: 100%; padding: 12px; border: 1px solid #ddd; margin-bottom: 15px;">
+                    <input type="text" placeholder="Street Address" required
+                        style="width: 100%; padding: 12px; border: 1px solid #ddd; margin-bottom: 15px;">
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 15px;">
+                        <input type="text" placeholder="City" required style="padding: 12px; border: 1px solid #ddd;">
+                        <input type="text" placeholder="Zip Code" required
+                            style="padding: 12px; border: 1px solid #ddd;">
+                    </div>
+
+                    <h2 style="font-family: 'Playfair Display', serif; margin: 30px 0 20px;">Payment</h2>
+                    <div style="background: #f1f1f1; padding: 15px; border-radius: 4px; margin-bottom: 20px;">
+                        <label><input type="radio" name="pay" checked> Credit Card</label>
+                        <label style="margin-left: 20px;"><input type="radio" name="pay"> PayPal</label>
+                    </div>
+                    <input type="text" placeholder="Card Number"
+                        style="width: 100%; padding: 12px; border: 1px solid #ddd; margin-bottom: 15px;">
+
+                    <button type="button" onclick="placeOrder()"
+                        style="width: 100%; background: #b8860b; color: #fff; border: none; padding: 15px; font-weight: bold; cursor: pointer; text-transform: uppercase;">
+                        Place Order
+                    </button>
+                </form>
+            </div>
+
+            <div class="order-summary"
+                style="background: #fff; padding: 30px; border-radius: 8px; height: fit-content; position: sticky; top: 20px;">
+                <h3
+                    style="font-family: 'Playfair Display', serif; border-bottom: 1px solid #eee; padding-bottom: 10px;">
+                    Order Summary</h3>
+                <div id="summary-items">
+                </div>
+                <div style="border-top: 2px solid #333; margin-top: 20px; padding-top: 15px;">
+                    <div style="display: flex; justify-content: space-between; font-weight: bold; font-size: 18px;">
+                        <span>Total:</span>
+                        <span id="final-total">Birr0.00</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Notification Toast -->
+    <div class="toast" id="toast">
+        <div class="toast-content">
+            <i class="fas fa-check-circle toast-icon"></i>
+            <div class="toast-message" id="toast-message">Product added to cart!</div>
+        </div>
+    </div>
+
+    <div class="modal" id="user-modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeUserModal()">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="modal-header">
+                <h2 class="modal-title">My Profile</h2>
+            </div>
+            <div class="modal-body">
+                <!-- Content loaded dynamically -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">
+        <div class="toast-content">
+            <i class="fas fa-check-circle toast-icon"></i>
+            <div class="toast-message" id="toast-message"></div>
+        </div>
+    </div>
+    <script src="x.js"></script>
+</body>
+
+</html>
